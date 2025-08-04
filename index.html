@@ -1,32 +1,92 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Área Protegida</title>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔐 Acesso Exclusivo | Clarinha</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #0e0e0e; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
-    input, button { padding: 10px; margin-top: 10px; }
-    .g-recaptcha { margin-top: 10px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #161b22;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px #58a6ff40;
+      max-width: 400px;
+      width: 90%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      background: #0d1117;
+      color: #e6edf3;
+      border: 1px solid #30363d;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #238636;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .error {
+      color: #ff7b72;
+      margin-top: 10px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h2>Digite a senha para acessar</h2>
-  <input type="password" id="senha" placeholder="Senha">
-  <div class="g-recaptcha" data-sitekey="6Le9e5orAAAAAASTqYBucamF_UJCv3ZWokg7N62-"></div>
-  <button onclick="verificar()">Entrar</button>
+  <div class="container">
+    <h1>🔒 Área Restrita</h1>
+    <form id="access-form">
+      <input type="password" id="password" placeholder="Digite a senha de acesso" required />
+      <div class="g-recaptcha" data-sitekey="6Le9e5orAAAAAASTqYBucamF_UJCv3ZWokg7N62-"></div>
+      <br />
+      <button type="submit">Entrar</button>
+      <div class="error" id="error-msg"></div>
+    </form>
+  </div>
 
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script>
-    function verificar() {
-      const senha = document.getElementById('senha').value;
-      const response = grecaptcha.getResponse();
-      if (senha === 'clarinha@1' && response) {
+    document.getElementById('access-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const senha = document.getElementById('password').value;
+      const captcha = grecaptcha.getResponse();
+      const erro = document.getElementById('error-msg');
+
+      if (captcha.length === 0) {
+        erro.textContent = 'Por favor, confirme que você não é um robô.';
+        return;
+      }
+
+      if (senha === 'clarinha@1') {
         window.location.href = "https://www.messengerx.io/mx-clarinha-5je8u174008";
       } else {
-        alert("Senha ou verificação inválida.");
+        erro.textContent = 'Senha incorreta. Tente novamente.';
       }
-    }
+    });
   </script>
 </body>
 </html>
