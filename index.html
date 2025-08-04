@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Área Protegida</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0e0e0e; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
+    input, button { padding: 10px; margin-top: 10px; }
+    .g-recaptcha { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Digite a senha para acessar</h2>
+  <input type="password" id="senha" placeholder="Senha">
+  <div class="g-recaptcha" data-sitekey="6Le9e5orAAAAAASTqYBucamF_UJCv3ZWokg7N62-"></div>
+  <button onclick="verificar()">Entrar</button>
+
+  <script>
+    function verificar() {
+      const senha = document.getElementById('senha').value;
+      const response = grecaptcha.getResponse();
+      if (senha === 'clarinha@1' && response) {
+        window.location.href = "https://www.messengerx.io/mx-clarinha-5je8u174008";
+      } else {
+        alert("Senha ou verificação inválida.");
+      }
+    }
+  </script>
+</body>
+</html>
